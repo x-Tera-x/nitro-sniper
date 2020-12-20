@@ -16,14 +16,14 @@ Snipe nitro gift codes from alt accounts to your main account.
 - Webhook support.
 
 # Installation methods
-### ___Heroku (recommended)___
+## ___Heroku (recommended)___
 Click on the image below and login to continue the setup. 
 
 ##### After deploying, Go to the `Resources` tab and turn off the `web` dyno and turn on `worker`. Now you can go ahead and click on `More` in the top right and click on logs.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/slow/nitro-sniper/tree/main)  
 
-### ___Local___
+## ___Local___
 - Make sure [Node](https://nodejs.org/en/) is installed on your system and open a command prompt/terminal.
 - Run `git clone https://github.com/slow/nitro-sniper nitro-sniper`
 - Run `cd nitro-sniper`
