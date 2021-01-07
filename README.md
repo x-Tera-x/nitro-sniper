@@ -15,6 +15,11 @@ Snipe nitro gift codes from alt accounts to your main account.
 - One-click deploy.
 - Webhook support.
 
+# Servers
+- It is recommended to join servers from server sites such as disboard.
+- If you have big servers over 50k, avoid a huge quantity of big servers as it can slow down the sniper due to it using a lot more memory for its cache.
+- Recommended site: https://disboard.org/servers?sort=-member_count
+
 # Installation methods
 ## ___Heroku (recommended)___
 Click on the image below and login to continue the setup. 
