@@ -1,5 +1,5 @@
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36';
-const regex = new RegExp(/(discord\.gift\/|discord\.com\/gifts\/|discordapp\.com\/gifts\/)[^\s]+/gim);
+const regex = new RegExp(/(discord.gift|discord.com|discordapp.com\/gifts)\/\w{16,25}/gim);
 const consumedCodes = [];
 
 require('dotenv').config({ path: 'dotenv' });
@@ -67,13 +67,8 @@ for (const token of tokens) {
 
          let start = new Date();
 
-         if (consumedCodes.includes(code)) {
+         if (consumedCodes.indexOf(code) > -1) {
             console.log(chalk.gray(`[Sniper] Avoiding Duplicate - Code: ${chalk.bold(code)} - ${msg.guild ? msg.guild.name : 'DMs'} (${msg.author.tag})`));
-            continue;
-         }
-
-         if (code.length < 16 || code.length > 24) {
-            console.log(chalk.gray(`[Sniper] Fake Code - Code: ${chalk.bold(code)} - ${msg.guild ? msg.guild.name : 'DMs'} (${msg.author.tag})`));
             continue;
          }
 
