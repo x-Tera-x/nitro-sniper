@@ -43,8 +43,8 @@ if (webhookUrl != null) {
 for (const token of tokens) {
    const client = new Client({
       messageCacheLifetime: 1,
-      messageCacheMaxSize: 10,
-      messageSweepInterval: 5,
+      messageCacheMaxSize: 1,
+      messageSweepInterval: 1,
       messageEditHistoryMaxSize: 1,
       restTimeOffset: 0,
       disabledEvents: [
