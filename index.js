@@ -11,6 +11,29 @@ const chalk = require('chalk');
 const tokens = process.env.guildTokens.split(',');
 const mainToken = process.env.mainToken;
 const webhookUrl = process.env.webhookUrl;
+let paymentMethod = null;
+
+phin({
+   url: 'https://discord.com/api/v6/users/@me/billing/payment-sources',
+   method: 'GET',
+   parse: 'json',
+   headers: {
+      'Authorization': mainToken,
+      'User-Agent': userAgent
+   }
+}, (err, res) => {
+   if (err) console.log(err);
+   if (res.body['message'] == '401: Unauthorized') {
+      console.log(chalk.red('[Sniper] Invalid main token, terminating process.'));
+      process.exit(-1)
+   } else if (res.body.length && res.body.length === 0) {
+      console.log(chalk.red('[Sniper] Main token does not have a billing source, some codes will not be sniped.'));
+   } else if (res.body[0]) {
+      paymentMethod = res.body[0].id;
+   } else {
+      console.log(chalk.red(`[Sniper] Unable to get billing source: ${res.body}`))
+   }
+})
 
 if (webhookUrl != null) {
    const webhooktoken = /[^/]*$/.exec(webhookUrl)[0];
@@ -72,14 +95,17 @@ for (const token of tokens) {
             continue;
          }
 
+         let payload = `{"channel_id":${msg.channel.id},"payment_source_id":${paymentMethod}}`
          phin({
             url: `https://discord.com/api/v6/entitlements/gift-codes/${code}/redeem`,
             method: 'POST',
             parse: 'json',
             headers: {
                'Authorization': mainToken,
-               'User-Agent': userAgent
-            }
+               'User-Agent': userAgent,
+               'Content-Length': payload.length
+            },
+            data: payload
          }, (err, res) => {
             let end = `${new Date() - start}ms`;
             if (err) {
