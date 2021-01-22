@@ -47,7 +47,7 @@ if (webhookUrl != null) {
          .addField('Type', type, true)
          .addField('Code', code, true)
          .addField('Account', alt, true)
-         .addField('Author', `${author}`, true)
+         .addField('Author', `${author}`, true);
       guild ?
          embed.addField('Location', `${guild} (Server)`, true) :
          embed.addField('Location', `DMs`, true);
